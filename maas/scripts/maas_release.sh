@@ -8,5 +8,5 @@ while (( $# )); do
     system_id=$(maas $USER machines read | jq -r "map(select(.hostname == \"$hostname\")) | .[] | .system_id")
     test ! -z $system_id && echo "$system_id" || { echo "error"; continue; }
     echo -n "Releasing machine... "
-    maas dbarelop machine release $system_id > /dev/null && echo "success" || { echo "error"; continue; }
+    maas $USER machine release $system_id > /dev/null && echo "success" || { echo "error"; continue; }
 done
