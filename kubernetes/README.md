@@ -28,6 +28,15 @@ To install the demo application *[Sock Shop](https://github.com/microservices-de
 
 4. Access the application with the URL `http://<master_ip>:<port>`. The port can be found in the output of the command `kubectl describe svc front-end -n sock-shop` in the `NodePort` section.
 
+## Restoring the systems
+To uninstall the sample application the following command has to be run on the master:
+`$ sudo kubectl delete namespace sock-shop`
+And to reset Kubernetes:
+```
+$ sudo kubeadm reset
+$ sudo systemctl start kubernetes
+```
+And then initialize the master and the slaves with `sudo kubeadm init` or `sudo kubeadm join`.
 ## References
 * [Kubernetes documentation](http://kubernetes.io/docs/)
 * [Kubernetes guide on installing Kubernetes on Linux](http://kubernetes.io/docs/getting-started-guides/kubeadm/)
