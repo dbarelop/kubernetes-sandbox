@@ -1,10 +1,15 @@
 # Kubernetes basic command-line operations
+
 Kubernetes is an open-source platform for automating deployment, scaling, and operations of application containers across clusters of hosts.
+
 ## Initializing the master and slave nodes
+
 This command initializes the Kubernetes master controller: 
+
 ```
 $ sudo kubeadm init
 ```
+
 Upon completion, the program will return the command that has to be issued in the slave machines, in the form of `kubeadm join --token <token> <master-ip>` (the command needs to be run with `sudo`).
 
 NOTE: It's possible that `kubeadm` complains about the directory `/var/lib/kubelet` not being empty. In that case, `kubeadm` needs to be run with the flag `--skip-preflight-checks` (right after the commands `init` or `join`)
@@ -12,11 +17,15 @@ NOTE: It's possible that `kubeadm` complains about the directory `/var/lib/kubel
 It is necessary to install a pod network add-on for pods to be able to communicate with each other when they are on different hosts.
 This needs to be done **before** deploying any application to the cluster.
 There are [several projects](http://kubernetes.io/docs/admin/addons/) that provide Kubernetes pod networks. [Weave Net](https://github.com/weaveworks/weave-kube) is one of them. It can be installed on the master node with the following command:
+
 ```
 $ kubectl apply -f https://git.io/weave-kube
 ```
+
 Once a pod network has been installed, you can confirm that it is working by checking that the `kube-dns` pod is `Running` in the output of `kubectl get pods --all-namespaces`. This signifies the cluster is ready.
+
 ## Installing a sample application
+
 To install the demo application *[Sock Shop](https://github.com/microservices-demo/microservices-demo)*, the following steps have to be followed:
 
 1. Create the namespace where the application will run:
@@ -29,15 +38,36 @@ To install the demo application *[Sock Shop](https://github.com/microservices-de
 
 4. Access the application with the URL `http://<master_ip>:<port>`. The port can be found in the output of the command `kubectl describe svc front-end -n sock-shop` in the `NodePort` section.
 
+# Installing the Web UI (Dashboard)
+
+To install the Kubernetes Dashboard, it can be deployed with:
+
+```
+$ kubectl create -f https://rawgit.com/kubernetes/dashboard/master/src/deploy/kubernetes-dashboard.yaml
+```
+
+Afterwards, the Dasboard can be accessed using the following command:
+
+```
+$ kubectl proxy
+```
+
+The Dashboard will be accessible at [http://localhost:8001/ui](http://localhost:8001/ui).
+
 ## Restoring the systems
+
 To uninstall the sample application the following command has to be run on the master:
 `$ sudo kubectl delete namespace sock-shop`
 And to reset Kubernetes:
+
 ```
 $ sudo kubeadm reset
 $ sudo systemctl start kubernetes
 ```
+
 And then initialize the master and the slaves with `sudo kubeadm init` or `sudo kubeadm join`.
+
 ## References
+
 * [Kubernetes documentation](http://kubernetes.io/docs/)
 * [Kubernetes guide on installing Kubernetes on Linux](http://kubernetes.io/docs/getting-started-guides/kubeadm/)
