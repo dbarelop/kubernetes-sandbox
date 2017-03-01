@@ -62,7 +62,7 @@ And to reset Kubernetes:
 
 ```
 $ sudo kubeadm reset
-$ sudo systemctl start kubernetes
+$ sudo systemctl restart kubelet.service
 ```
 
 And then initialize the master and the slaves with `sudo kubeadm init` or `sudo kubeadm join`.
