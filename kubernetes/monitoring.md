@@ -11,6 +11,13 @@ $ git clone https://github.com/kubernetes/heapster
 $ cd heapster
 ```
 
+Modify the Grafana deployment file to replace the environment variable `GF_SERVER_ROOT_URL`, in order to make use of the API server proxy:
+
+```sh
+$ sed -i -r 's/(value: \/)$/#\1/' deploy/kube-config/influxdb/grafana-deployment.yaml
+$ sed -i -r 's/# (value: \/api\/v1\/proxy\/namespaces\/kube-system\/services\/monitoring-grafana\/)$/\1/' deploy/kube-config/influxdb/grafana-deployment.yaml
+```
+
 Deploy the pods:
 
 ```sh
