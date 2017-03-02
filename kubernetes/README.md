@@ -13,9 +13,10 @@ $ sudo kubeadm init
 Upon completion, the program will return the command that has to be issued in the slave machines, in the form of `kubeadm join --token <token> <master-ip>` (the command needs to be run with `sudo`).
 
 NOTE: It's possible that `kubeadm` complains about the directory `/var/lib/kubelet` not being empty. In that case, `kubeadm` needs to be run with the flag `--skip-preflight-checks` (right after the commands `init` or `join`)
+
 ## Installing a pod network
-It is necessary to install a pod network add-on for pods to be able to communicate with each other when they are on different hosts.
-This needs to be done **before** deploying any application to the cluster.
+
+It is necessary to install a pod network add-on for pods to be able to communicate with each other when they are on different hosts. This needs to be done **before** deploying any application to the cluster.
 There are [several projects](http://kubernetes.io/docs/admin/addons/) that provide Kubernetes pod networks. [Weave Net](https://github.com/weaveworks/weave-kube) is one of them. It can be installed on the master node with the following command:
 
 ```
@@ -73,3 +74,4 @@ And then initialize the master and the slaves with `sudo kubeadm init` or `sudo 
 
 * [Kubernetes documentation](http://kubernetes.io/docs/)
 * [Kubernetes guide on installing Kubernetes on Linux](http://kubernetes.io/docs/getting-started-guides/kubeadm/)
+* [Kubernetes Web UI](https://kubernetes.io/docs/user-guide/ui/)
