@@ -54,6 +54,8 @@ $ kubectl proxy
 
 The Dashboard will be accessible at [http://localhost:8001/ui](http://localhost:8001/ui).
 
+Alternatively, it can be accessed through the proxy API, at [http://localhost:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard](http://localhost:8080/api/v1/proxy/namespaces/kube-system/services/kubernetes-dashboard).
+
 ## Restoring the systems
 
 To uninstall the sample application the following command has to be run on the master:
