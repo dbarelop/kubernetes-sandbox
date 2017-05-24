@@ -31,7 +31,7 @@ mkdir vagrant && cd vagrant
 # Setup VM deploy script
 cat << EOF > deploy.sh
 #!/bin/bash
-test \$# -eq 2 || printf "Usage: $0 <first_vm> <last_vm>\nCreates u<first_vm>..u<last_vm> virtual machines\n\n"
+test \$# -eq 2 || printf "Usage: \$0 <first_vm> <last_vm>\nCreates u<first_vm>..u<last_vm> virtual machines\n\n"
 for i in \$(seq \$1 \$2); do
     hostname="u\$i"
     if [ ! -d "\$hostname" ]; then
